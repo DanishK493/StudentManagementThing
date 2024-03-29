@@ -25,19 +25,19 @@ class ManagementSystem:
         """
         print(message)
         id = input("Please enter the student ID: ")
-        if len(id) != 6 or not id.startswith('700') or not id.isdigit():
+        if len(id) != 6 or not id.startswith('700') or not id.isdigit(): # prints invalid if id isnt a 6 in length, doesnt start with 700, or isnt a digit
             print("\u274C Invalid ID")
             return
         name = input("Please enter the student name (Firstname Lastname): ")
-        if not (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
+        if not (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()): # prints invalid if name doesnt start with uppercase or name includes numbers
             print("\u274C Invalid Name")
             return
         phone = input("Please Enter the Student Phone \u260E: ")
-        if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
+        if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()): #prints invalid if len isnt 12 or dashes are missing or letters are included
             print("\u274C Invalid Number")
             return
         major = input("Please Enter the Student Major: ").upper()
-        if major not in ['CS','CYBR','SE','IT','DS']:
+        if major not in ['CS','CYBR','SE','IT','DS']: #prints invalid if major is not one of these
             print("\u274C Invalid Major")
             return
         self.students.append({
