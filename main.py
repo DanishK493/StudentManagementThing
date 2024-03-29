@@ -15,7 +15,9 @@ class ManagementSystem:
             print(f"An error occurred: {e}")
     def addStudent(self):
         pass
-    def delStudent(self,ID):
+    def delStudent(self):
+        #enter ID of student to delete
+        ID = input("Enter the ID of the student you want to delete: ")
         #counter for if ID is in students
         length = 0
         for i in self.students:
@@ -62,8 +64,7 @@ def main():
             case 3:
                 ms.modifyStudent()
             case 4:
-                ID = input("Enter the ID of the student you want to delete: ")
-                ms.delStudent(ID)
+                ms.delStudent()
             case 5:
                 ms.displayStudents()
             case 6:
