@@ -53,7 +53,10 @@ class ManagementSystem:
     def showStudent(self):
         pass
     def displayStudents(self):
-        pass
+        print("Student Record")
+        print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
+        for student in self.students:
+            print(f"{student['ID']:<20}{student['Name']:<20}{student['Phone']:<20}{student['Major']:<20}")
 def main():
     students = [
         {"ID":"700001","Name":"Danish Khateeb","Phone":"000-000-0000","Major":"CS"}
