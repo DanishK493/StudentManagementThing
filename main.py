@@ -48,7 +48,32 @@ class ManagementSystem:
         })
         print("\u2714 New student record has been added!")
     def delStudent(self):
-        pass
+        #enter ID of student to delete
+        ID = input("Enter the ID of the student you want to delete: ")
+        #counter for if ID is in students
+        length = 0
+        for i in self.students:
+            if i["ID"] != ID:
+                 length += 1
+            else:
+                #breaks if ID is found
+                break
+        #if ID is not in students
+        if length == len(self.students):
+            print("The student ID does not exist")
+        #if ID is in students
+        else:
+            #*add print student record
+            #checks if user is sure
+            q = input("Are you sure you want to delete the record? Y or N: ")
+            #if user is sure, it deletes the record
+            if q.upper() == "Y":
+                for i in range(len(self.students)-1):
+                    if self.students[i]["ID"] == ID:
+                        del self.students[i]
+            #if user is not sure, it passes
+            else:
+                pass
     def modifyStudent(self):
         pass
     def showStudent(self):
@@ -57,7 +82,7 @@ class ManagementSystem:
         print("Student Record")
         print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
         for student in self.students:
-            print(f"{student['ID']:<20}{student['Name']:<20}{student['Phone']:<20}{student['Major']:<20}")
+            print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}")
 def main():
     students = [
         {"\u2709 ID":"700001","Name":"Danish Khateeb","Phone":"000-000-0000","Major":"CS"}
