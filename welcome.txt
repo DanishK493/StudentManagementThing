@@ -1,0 +1,12 @@
+============================================================
+              Ã°Å¸Å’ÂºÃ°Å¸Å’ÂºÃ°Å¸Å’Âº Welcome %s Ã°Å¸Å’ÂºÃ°Å¸Å’ÂºÃ°Å¸Å’Âº
+           to the Student Management System
+
+		Ã¢â€”â€   1. Add Student
+		Ã¢â€”â€   2. Show Student
+		Ã¢â€”â€   3. Modify Student
+		Ã¢â€”â€   4. Delete Student
+		Ã¢â€”â€   5. Display Student Scores
+		Ã¢â€”â€   6. Return to the Previous Menu
+
+============================================================
