@@ -15,8 +15,25 @@ class ManagementSystem:
             print(f"An error occurred: {e}")
     def addStudent(self):
         pass
-    def delStudent(self):
-        pass
+    def delStudent(self,ID):
+        w = 0
+        for i in self.students:
+            if i["ID"] != ID:
+                 w += 1
+            else:
+                break
+        if w == len(self.students):
+            print("The student ID does not exist")
+
+        else:
+            #print student record
+            q = input("Are you sure you want to delete the record? Y or N: ")
+            if q.upper() == "Y":
+                for i in range(len(self.students)-1):
+                    if self.students[i]["ID"] == ID:
+                        del self.students[i]
+                    else:
+                        pass
     def modifyStudent(self):
         pass
     def showStudent(self):
