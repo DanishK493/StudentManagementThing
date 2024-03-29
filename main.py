@@ -14,7 +14,38 @@ class ManagementSystem:
         except Exception as e:
             print(f"An error occurred: {e}")
     def addStudent(self):
-        pass
+        message = """
+==============================Add Student==============================
+1. The first letter of firstname and lastname must be capitalized
+2. Firstname and lastname must each have at least two letters
+3. No digit allowed in the name
+4. Student ID is 6 digits long which must start with 700
+5. Phone must be in the (xxx-xxx-xxxx) format
+6. Student major must be in CS, CYBR, SE, IT, or DS
+        """
+        print(message)
+        id = input("Please enter the student ID: ")
+        if len(id) != 6 or not id.startswith('700') or not id.isdigit():
+            print("Invalid ID")
+            return
+        name = input("Please enter the student name (Firstname Lastname): ")
+        if not (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
+            print("Invalid Name")
+            return
+        phone = input("Please Enter the Student Phone \u260E: ")
+        if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
+            return
+        major = input("Please Enter the Student Major: ").upper()
+        if major not in ['CS','CYBR','SE','IT','DS']:
+            print("Invalid Major")
+            return
+        self.students.append({
+            "ID": id,
+            "Name": name,
+            "Phone": phone,
+            "Major": major
+        })
+        print("\u2714 New student record has been added")
     def delStudent(self):
         pass
     def modifyStudent(self):
