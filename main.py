@@ -60,7 +60,7 @@ class ManagementSystem:
                 break
         #if ID is not in students
         if length == len(self.students):
-            print("The student ID does not exist")
+            print("\u274C The student ID does not exist")
         #if ID is in students
         else:
             #*add print student record
