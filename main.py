@@ -74,7 +74,12 @@ class ManagementSystem:
             else:
                 pass
     def modifyStudent(self):
-        pass
+        id = input("Please Enter Student ID to Modify: ")
+        student = next((s for s in self.students if s["ID"] == id),None)
+        if student:
+            pass
+        else:
+            print(f"Student ID {id} doesn't exist")
     def showStudent(self):
         pass
     def displayStudents(self):
