@@ -83,7 +83,7 @@ class ManagementSystem:
         else:
             print(f"Student ID {id} doesn't exist")
     def showStudent(self):
-        ID = input("Enter the ID of the student you want to delete: ")
+        ID = input("Enter the ID of the student you want to show: ")
         #counter for if ID is in students
         length = 0
         for i in self.students:
