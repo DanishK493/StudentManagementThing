@@ -106,7 +106,7 @@ class ManagementSystem:
             print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}")
 def main():
     students = [
-        {"\u2709 ID":"700001","Name":"Danish Khateeb","Phone":"000-000-0000","Major":"CS"}
+        {"ID":"700001","Name":"Danish Khateeb","Phone":"000-000-0000","Major":"CS"}
          ]
     ms = ManagementSystem(students)
     ms.welcomeMessage()
