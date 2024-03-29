@@ -62,7 +62,8 @@ def main():
             case 3:
                 ms.modifyStudent()
             case 4:
-                ms.delStudent()
+                ID = input("Enter the ID of the student you want to delete: ")
+                ms.delStudent(ID)
             case 5:
                 ms.displayStudents()
             case 6:
