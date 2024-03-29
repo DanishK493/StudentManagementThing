@@ -50,17 +50,10 @@ class ManagementSystem:
     def delStudent(self):
         #enter ID of student to delete
         ID = input("Enter the ID of the student you want to delete: ")
-        #counter for if ID is in students
-        length = 0
-        for i in self.students:
-            if i["ID"] != ID:
-                 length += 1
-            else:
-                #breaks if ID is found
-                break
+        student = next((s for s in self.students if s["ID"] == ID),None)
         #if ID is not in students
-        if length == len(self.students):
-            print("\u274C The student ID does not exist")
+        if student is None:
+            print(f"Student ID {ID} doesn't exist") 
         #if ID is in students
         else:
             #*add print student record
@@ -69,7 +62,6 @@ class ManagementSystem:
             #if user is sure, it deletes the record
             if q.upper() == "Y":
                 for i in range(len(self.students)-1 if len(self.students) > 1 else 1):
-                    self.students[i].values()
                     if self.students[i]["ID"] == ID:
                         del self.students[i]
             #if user is not sure, it passes
@@ -83,22 +75,17 @@ class ManagementSystem:
         else:
             print(f"Student ID {id} doesn't exist")
     def showStudent(self):
+        #enter ID of student to show
         ID = input("Enter the ID of the student you want to show: ")
-        #counter for if ID is in students
-        length = 0
-        for i in self.students:
-            if i["ID"] != ID:
-                 length += 1
-            else:
-                #breaks if ID is found
-                break
-        if length == len(self.students):
-            print("The student ID does not exist")
+        student = next((s for s in self.students if s["ID"] == ID),None)
+        if student is None:
+            print(f"Student ID {ID} doesn't exist")
         #if ID is in students
         else:
-            for i in range(len(self.students)-1 if len(self.students) > 1 else 1):
-                if self.students[i]["ID"] == ID:
-                    print(self.students[i])
+            #prints single ID
+            for i in self.students:
+                if i["ID"] == ID:
+                    print(i)
     def displayStudents(self):
         print("Student Record")
         print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
