@@ -24,7 +24,7 @@ class ManagementSystem:
 6. Student major must be in CS, CYBR, SE, IT, or DS
         """
         print(message)
-        id = input("Please enter the student ID: ")
+        id = input("Please enter the student \u2709 ID: ")
         if len(id) != 6 or not id.startswith('700') or not id.isdigit():
             print("\u274C Invalid ID")
             return
@@ -53,7 +53,7 @@ class ManagementSystem:
         student = next((s for s in self.students if s["ID"] == ID),None)
         #if ID is not in students
         if student is None:
-            print(f"Student ID {ID} doesn't exist") 
+            print(f"\u274C Student ID {ID} doesn't exist") 
         #if ID is in students
         else:
             #*add print student record
@@ -67,30 +67,32 @@ class ManagementSystem:
             #if user is not sure, it passes
             else:
                 pass
+    #Modify Student Number
     def modifyStudent(self):
         id = input("Please Enter Student ID to Modify: ")
         student = next((s for s in self.students if s["ID"] == id),None)
         if student:
             pass
         else:
-            print(f"Student ID {id} doesn't exist")
+            print(f"\u274C Student ID {id} doesn't exist")
     def showStudent(self):
         #enter ID of student to show
         ID = input("Enter the ID of the student you want to show: ")
         student = next((s for s in self.students if s["ID"] == ID),None)
         if student is None:
-            print(f"Student ID {ID} doesn't exist")
+            print(f"\u274C Student ID {ID} doesn't exist")
         #if ID is in students
         else:
             #prints single ID
             for i in self.students:
                 if i["ID"] == ID:
                     print(i)
+    #Display all Student
     def displayStudents(self):
         print("Student Record")
-        print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
+        print(f"\u2709 {'ID':<20s} {'Name':<20s} \u260E {'Phone':<20s}{'Major':<20s}")
         for student in self.students:
-            print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}")
+            print(f"{student['ID']:<20}{student['Name']:<20s} {student['Phone']:<20s}{student['Major']:<20s}")
 def main():
     students = [
         {"ID":"700001","Name":"Danish Khateeb","Phone":"000-000-0000","Major":"CS"}
