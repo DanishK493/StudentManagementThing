@@ -26,18 +26,19 @@ class ManagementSystem:
         print(message)
         id = input("Please enter the student ID: ")
         if len(id) != 6 or not id.startswith('700') or not id.isdigit():
-            print("Invalid ID")
+            print("\u274C Invalid ID")
             return
         name = input("Please enter the student name (Firstname Lastname): ")
         if not (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
-            print("Invalid Name")
+            print("\u274C Invalid Name")
             return
         phone = input("Please Enter the Student Phone \u260E: ")
         if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
+            print("\u274C Invalid Number")
             return
         major = input("Please Enter the Student Major: ").upper()
         if major not in ['CS','CYBR','SE','IT','DS']:
-            print("Invalid Major")
+            print("\u274C Invalid Major")
             return
         self.students.append({
             "ID": id,
@@ -45,7 +46,7 @@ class ManagementSystem:
             "Phone": phone,
             "Major": major
         })
-        print("\u2714 New student record has been added")
+        print("\u2714 New student record has been added!")
     def delStudent(self):
         #enter ID of student to delete
         ID = input("Enter the ID of the student you want to delete: ")
@@ -59,7 +60,7 @@ class ManagementSystem:
                 break
         #if ID is not in students
         if length == len(self.students):
-            print("The student ID does not exist")
+            print("\u274C The student ID does not exist")
         #if ID is in students
         else:
             #*add print student record
@@ -89,7 +90,7 @@ class ManagementSystem:
             print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}")
 def main():
     students = [
-        {"ID":"700001","Name":"Danish Khateeb","Phone":"000-000-0000","Major":"CS"}
+        {"\u2709 ID":"700001","Name":"Danish Khateeb","Phone":"000-000-0000","Major":"CS"}
          ]
     ms = ManagementSystem(students)
     ms.welcomeMessage()
