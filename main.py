@@ -16,24 +16,30 @@ class ManagementSystem:
     def addStudent(self):
         pass
     def delStudent(self,ID):
-        w = 0
+        #counter for if ID is in students
+        length = 0
         for i in self.students:
             if i["ID"] != ID:
-                 w += 1
+                 length += 1
             else:
+                #breaks if ID is found
                 break
-        if w == len(self.students):
+        #if ID is not in students
+        if length == len(self.students):
             print("The student ID does not exist")
-
+        #if ID is in students
         else:
-            #print student record
+            #*add print student record
+            #checks if user is sure
             q = input("Are you sure you want to delete the record? Y or N: ")
+            #if user is sure, it deletes the record
             if q.upper() == "Y":
                 for i in range(len(self.students)-1):
                     if self.students[i]["ID"] == ID:
                         del self.students[i]
-                    else:
-                        pass
+            #if user is not sure, it passes
+            else:
+                pass
     def modifyStudent(self):
         pass
     def showStudent(self):
