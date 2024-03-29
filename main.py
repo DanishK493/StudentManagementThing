@@ -1,3 +1,5 @@
+import sys
+
 class ManagementSystem:
     def __init__(self,students):
         self.students = students
@@ -27,4 +29,19 @@ def main():
          ]
     ms = ManagementSystem(students)
     ms.welcomeMessage()
+    while True:
+        choice = int(input("Please Enter the Operation Code: "))
+        match choice:
+            case 1:
+                ms.addStudent()
+            case 2:
+                ms.showStudent()
+            case 3:
+                ms.modifyStudent()
+            case 4:
+                ms.delStudent()
+            case 5:
+                ms.displayStudents()
+            case 6:
+                sys.exit()
 main()
