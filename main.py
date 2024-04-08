@@ -64,6 +64,7 @@ class ManagementSystem:
                 for i in range(len(self.students)-1 if len(self.students) > 1 else 1):
                     if self.students[i]["ID"] == ID:
                         del self.students[i]
+                        print("Student record has been deleted")
             #if user is not sure, it passes
             else:
                 pass
@@ -85,7 +86,8 @@ class ManagementSystem:
             #prints single ID
             for i in self.students:
                 if i["ID"] == ID:
-                    print(i)
+                    print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
+                    print(f"{i['ID']:<20}{i['Name']:<20s}{i['Phone']:<20s}{i['Major']:<20s}")
     def displayStudents(self):
         print("Student Record")
         print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
