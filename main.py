@@ -8,22 +8,17 @@ class ManagementSystem:
         try:
             with open(path,'r',encoding='UTF-8') as file:
                 content = file.read()
-                print(content)
-        except FileNotFoundError:
-            print(f"File '{path}' not found.")
+                print(content) # print welcome menu
         except Exception as e:
             print(f"An error occurred: {e}")
     def addStudent(self):
-        message = """
-==============================Add Student==============================
-1. The first letter of firstname and lastname must be capitalized
-2. Firstname and lastname must each have at least two letters
-3. No digit allowed in the name
-4. Student ID is 6 digits long which must start with 700
-5. Phone must be in the (xxx-xxx-xxxx) format
-6. Student major must be in CS, CYBR, SE, IT, or DS
-        """
-        print(message)
+        path = 'addstudent.txt'
+        try:
+            with open(path,'r') as file:
+                content = file.read()
+                print(content) #print add student menu
+        except Exception as e:
+            print(f"An error occurred: {e}")
         id = input("Please enter the student ID: ")
         if len(id) != 6 or not id.startswith('700') or not id.isdigit(): # prints invalid if id isnt a 6 in length, doesnt start with 700, or isnt a digit
             print("\u274C Invalid ID")
