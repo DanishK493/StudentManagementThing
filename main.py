@@ -8,36 +8,31 @@ class ManagementSystem:
         try:
             with open(path,'r',encoding='UTF-8') as file:
                 content = file.read()
-                print(content)
-        except FileNotFoundError:
-            print(f"File '{path}' not found.")
+                print(content) # print welcome menu
         except Exception as e:
             print(f"An error occurred: {e}")
     def addStudent(self):
-        message = """
-==============================Add Student==============================
-1. The first letter of firstname and lastname must be capitalized
-2. Firstname and lastname must each have at least two letters
-3. No digit allowed in the name
-4. Student ID is 6 digits long which must start with 700
-5. Phone must be in the (xxx-xxx-xxxx) format
-6. Student major must be in CS, CYBR, SE, IT, or DS
-        """
-        print(message)
-        id = input("Please enter the student \u2709 ID: ")
-        if len(id) != 6 or not id.startswith('700') or not id.isdigit():
+        path = 'addstudent.txt'
+        try:
+            with open(path,'r') as file:
+                content = file.read()
+                print(content) #print add student menu
+        except Exception as e:
+            print(f"An error occurred: {e}")
+        id = input("Please enter the student ID: ")
+        if len(id) != 6 or not id.startswith('700') or not id.isdigit(): # prints invalid if id isnt a 6 in length, doesnt start with 700, or isnt a digit
             print("\u274C Invalid ID")
             return
         name = input("Please enter the student name (Firstname Lastname): ")
-        if not (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
+        if not (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()): # prints invalid if name doesnt start with uppercase or name includes numbers
             print("\u274C Invalid Name")
             return
         phone = input("Please Enter the Student Phone \u260E: ")
-        if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
+        if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()): #prints invalid if len isnt 12 or dashes are missing or letters are included
             print("\u274C Invalid Number")
             return
         major = input("Please Enter the Student Major: ").upper()
-        if major not in ['CS','CYBR','SE','IT','DS']:
+        if major not in ['CS','CYBR','SE','IT','DS']: #prints invalid if major is not one of these
             print("\u274C Invalid Major")
             return
         self.students.append({
@@ -64,6 +59,7 @@ class ManagementSystem:
                 for i in range(len(self.students)-1 if len(self.students) > 1 else 1):
                     if self.students[i]["ID"] == ID:
                         del self.students[i]
+                        print("Student record has been deleted")
             #if user is not sure, it passes
             else:
                 pass
@@ -86,8 +82,8 @@ class ManagementSystem:
             #prints single ID
             for i in self.students:
                 if i["ID"] == ID:
-                    print(i)
-    #Display all Student
+                    print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
+                    print(f"{i['ID']:<20}{i['Name']:<20s}{i['Phone']:<20s}{i['Major']:<20s}")
     def displayStudents(self):
         print("Student Record")
         print(f"\u2709 {'ID':<20s} {'Name':<20s} \u260E {'Phone':<20s}{'Major':<20s}")
@@ -105,11 +101,11 @@ def main():
             case 1:
                 ms.addStudent()
             case 2:
-                ms.showStudent()
+                ms.delStudent()
             case 3:
                 ms.modifyStudent()
             case 4:
-                ms.delStudent()
+                ms.showStudent()
             case 5:
                 ms.displayStudents()
             case 6:
