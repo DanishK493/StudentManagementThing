@@ -1,9 +1,8 @@
 import sys
-
-import managementSystem as m
+from managementSystem import ManagementSystem
 
 def main():
-    ms = m.ManagementSystem()
+    ms = ManagementSystem()
     ms.welcomeMessage()
     while True:
         choice = int(input("Please Enter the Operation Code: "))
