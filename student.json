@@ -1,0 +1,20 @@
+[
+    {
+        "ID": "700001",
+        "Name": "Emily White",
+        "Phone": "816-111-1111",
+        "Major": "CS"
+    },
+    {
+        "ID": "700002",
+        "Name": "David Bachman",
+        "Phone": "816-222-2222",
+        "Major": "CYBR"
+    },
+    {
+        "ID": "700003",
+        "Name": "Jason James",
+        "Phone": "816-333-3333",
+        "Major": "SE"
+    }
+]

@@ -1,12 +1,9 @@
 import sys
 
-import managementSystem
+import managementSystem as m
 
 def main():
-    students = [
-        {"ID":"700001","Name":"Danish Khateeb","Phone":"000-000-0000","Major":"CS"}
-         ]
-    ms = managementSystem.ManagementSystem(students)
+    ms = m.ManagementSystem()
     ms.welcomeMessage()
     while True:
         choice = int(input("Please Enter the Operation Code: "))

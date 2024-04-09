@@ -1,6 +1,9 @@
+import json
+
 class ManagementSystem:
-    def __init__(self,students):
-        self.students = students
+    def __init__(self):
+        with open('student.json','r') as f:
+            self.students = json.load(f)
     def welcomeMessage(self):
         path = 'welcome.txt'
         try:
