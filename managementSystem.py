@@ -43,6 +43,8 @@ class ManagementSystem:
             "Major": major
         })
         print("\u2714 New student record has been added!")
+        with open('student.json', 'w') as f:
+            json.dump(self.students, f, indent=4)
     #deletes student record
     def delStudent(self):
         #enter ID of student to delete
