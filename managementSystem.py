@@ -91,6 +91,8 @@ class ManagementSystem:
             
         else:
             print(f"Student ID {id} doesn't exist")
+        with open('student.json', 'w') as f:
+            json.dump(self.students, f, indent=4)
     def showStudent(self):
         #enter ID of student to show
         ID = input("Enter the ID of the student you want to show: ")
