@@ -105,11 +105,11 @@ def main():
             case 1:
                 ms.addStudent()
             case 2:
-                ms.showStudent()
+                 ms.delStudent()
             case 3:
                 ms.modifyStudent()
             case 4:
-                ms.delStudent()
+                ms.showStudent()
             case 5:
                 ms.displayStudents()
             case 6:
