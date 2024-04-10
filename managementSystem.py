@@ -67,6 +67,8 @@ class ManagementSystem:
             #if user is not sure, it passes
             else:
                 pass
+        with open('student.json', 'w') as f:
+            json.dump(self.students, f, indent=4)
     def modifyStudent(self):
         id = input("Please Enter Student ID to Modify: ")
         student = next((s for s in self.students if s["ID"] == id),None)
