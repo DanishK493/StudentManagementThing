@@ -77,12 +77,13 @@ class ManagementSystem:
             name = input("New name: ")
             phone = input("New phone: ")
             major = input("New major: ")
-            if not (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
+            if  (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
                 student["Name"] = name
-            if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
+            if (len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
                 student["Phone"] = phone
             if major.upper() in ['CS','CYBR','SE','IT','DS']:
                 student["Major"] = major.upper()
+            
             if student != student1:
                 print("Student record has been modified")
             else:
