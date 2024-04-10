@@ -43,6 +43,8 @@ class ManagementSystem:
             "Major": major
         })
         print("\u2714 New student record has been added!")
+        with open('student.json', 'w') as f:
+            json.dump(self.students, f, indent=4)
     #deletes student record
     def delStudent(self):
         #enter ID of student to delete
@@ -65,6 +67,8 @@ class ManagementSystem:
             #if user is not sure, it passes
             else:
                 pass
+        with open('student.json', 'w') as f:
+            json.dump(self.students, f, indent=4)
     def modifyStudent(self):
         id = input("Please Enter Student ID to Modify: ")
         student = next((s for s in self.students if s["ID"] == id),None)
