@@ -68,8 +68,22 @@ class ManagementSystem:
     def modifyStudent(self):
         id = input("Please Enter Student ID to Modify: ")
         student = next((s for s in self.students if s["ID"] == id),None)
+        student1 = student
         if student:
-            pass
+            name = input("New name: ")
+            phone = input("New phone: ")
+            major = input("New major: ")
+            if not (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
+                student["Name"] = name
+            if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
+                student["Phone"] = phone
+            if major.upper() in ['CS','CYBR','SE','IT','DS']:
+                student["Major"] = major.upper()
+            if student != student1:
+                print("Student record has been modified")
+            else:
+                print("No changes made")
+            
         else:
             print(f"Student ID {id} doesn't exist")
     def showStudent(self):
