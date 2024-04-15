@@ -18,5 +18,7 @@ def main():
             case 5:
                 ms.displayStudents()
             case 6:
+                ms.displayStudentsInMajor()
+            case 7:
                 sys.exit()
 main()

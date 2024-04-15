@@ -122,4 +122,12 @@ class ManagementSystem:
         else:
             #This is where the absent count would be added
             print()
-            
+    def displayStudentsInMajor(self):
+        """prints all students taking a specific course"""
+        major = input("Enter major: ").upper()
+        print(f"Students in {major}:")
+        for student in self.students:
+            if student['Major'] == major:
+                print(f"{student['Name']:<20s}")
+
+        
