@@ -124,6 +124,9 @@ class ManagementSystem:
             #This is where the absent count would be added
             student["Absences"] += 1
             print("Absence added")
+        with open('student.json', 'w') as f:
+            json.dump(self.students, f, indent=4)
+        
     def displayStudentsInMajor(self):
         """prints all students taking a specific course"""
         major = input("Enter major: ").upper()
