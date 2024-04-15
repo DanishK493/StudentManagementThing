@@ -114,3 +114,12 @@ class ManagementSystem:
         print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
         for student in self.students:
             print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}")
+    def Absences(self):
+        ID = input("Enter the ID of the student you want to count absent: ")
+        student = next((s for s in self.students if s["ID"] == ID),None)
+        if student is None:
+            print(f"Student ID {ID} doesn't exist")
+        else:
+            #This is where the absent count would be added
+            print()
+            
