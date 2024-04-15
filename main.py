@@ -20,5 +20,7 @@ def main():
             case 6:
                 ms.displayStudentsInMajor()
             case 7:
+                ms.absences()
+            case 8:
                 sys.exit()
 main()

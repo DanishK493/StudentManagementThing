@@ -3,6 +3,7 @@
         "ID": "700001",
         "Name": "Emily White",
         "Phone": "816-333-3333",
-        "Major": "CS"
+        "Major": "CS",
+        "Absences": 0
     }
 ]

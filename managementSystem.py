@@ -40,7 +40,8 @@ class ManagementSystem:
             "ID": id,
             "Name": name,
             "Phone": phone,
-            "Major": major
+            "Major": major,
+            "Absences": 0
         })
         print("\u2714 New student record has been added!")
         with open('student.json', 'w') as f:
@@ -107,21 +108,22 @@ class ManagementSystem:
             #prints single ID
             for i in self.students:
                 if i["ID"] == ID:
-                    print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
-                    print(f"{i['ID']:<20}{i['Name']:<20s}{i['Phone']:<20s}{i['Major']:<20s}")
+                    print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Absences':<20s}")
+                    print(f"{i['ID']:<20}{i['Name']:<20s}{i['Phone']:<20s}{i['Major']:<20s}{str(i['Absences']):<20s}")
     def displayStudents(self):
         print("Student Record")
-        print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}")
+        print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Abesences':<20s}")
         for student in self.students:
-            print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}")
-    def Absences(self):
+            print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}{str(student['Absences']):<20s}")
+    def absences(self):
         ID = input("Enter the ID of the student you want to count absent: ")
         student = next((s for s in self.students if s["ID"] == ID),None)
         if student is None:
             print(f"Student ID {ID} doesn't exist")
         else:
             #This is where the absent count would be added
-            print()
+            student["Absences"] += 1
+            print("Absence added")
     def displayStudentsInMajor(self):
         """prints all students taking a specific course"""
         major = input("Enter major: ").upper()

@@ -7,6 +7,7 @@
 		Ã¢â€”â€   4. Query a student
 		Ã¢â€”â€   5. Display all students
 		Ã¢â€”â€	  6. Display all students in a major
-		Ã¢â€”â€   7. Exit the system
+		Ã¢â€”â€   7. Count student absent
+		Ã¢â€”â€   8. Exit the system
 
 ============================================================
