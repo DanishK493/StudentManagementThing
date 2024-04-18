@@ -44,6 +44,7 @@ class ManagementSystem:
             "Absences": 0
         })
         print("\u2714 New student record has been added!")
+        #updates json file
         with open('student.json', 'w') as f:
             json.dump(self.students, f, indent=4)
     #deletes student record
@@ -68,32 +69,45 @@ class ManagementSystem:
             #if user is not sure, it passes
             else:
                 pass
+        #updates json file
         with open('student.json', 'w') as f:
             json.dump(self.students, f, indent=4)
     def modifyStudent(self):
+        #enter student id to modify
         id = input("Please Enter Student ID to Modify: ")
+        #checks for student id in students
         student = next((s for s in self.students if s["ID"] == id),None)
         counter = 0
+        #if student id exists
         if student:
+            #gives new name, phone, and major
             name = input("New name: ")
             phone = input("New phone: ")
             major = input("New major: ")
+            #checks if name is valid
             if  (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
                 student["Name"] = name
+                #adds a count if name is modified
                 counter+=1
+            #checks if phone is valid
             if (len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
                 student["Phone"] = phone
+                #adds a count if phone is modified
                 counter+=1
+            #checks if major is valid
             if major.upper() in ['CS','CYBR','SE','IT','DS']:
                 student["Major"] = major.upper()
+                #adds a count if major is modified
                 counter+=1
+            #if any of the fields are modified
             if counter != 0:
                 print("\u2714 Student record has been modified!")
             else:
                 print("\u274C No modifications were made")
-            
+        #if student id doesn't exist
         else:
             print(f"Student ID {id} doesn't exist")
+        #updates json file
         with open('student.json', 'w') as f:
             json.dump(self.students, f, indent=4)
         
@@ -111,24 +125,30 @@ class ManagementSystem:
                     print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Absences':<20s}")
                     print(f"{i['ID']:<20}{i['Name']:<20s}{i['Phone']:<20s}{i['Major']:<20s}{str(i['Absences']):<20s}")
     def displayStudents(self):
+        #prints all students
         print("Student Record")
         print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Abesences':<20s}")
         for student in self.students:
             print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}{str(student['Absences']):<20s}")
     def absences(self):
+        #enter ID of student to count absent
         ID = input("Enter the ID of the student you want to count absent: ")
+        #checks if ID is in students
         student = next((s for s in self.students if s["ID"] == ID),None)
+        #if student doesn't exist
         if student is None:
             print(f"Student ID {ID} doesn't exist")
+        #if student exists
         else:
-            #This is where the absent count would be added
+            #absent is counted
             student["Absences"] += 1
             print("Absence added")
+        #json file is updated
         with open('student.json', 'w') as f:
             json.dump(self.students, f, indent=4)
         
     def displayStudentsInMajor(self):
-        """prints all students taking a specific course"""
+        #prints all students taking a specific course
         major = input("Enter major: ").upper()
         print(f"Students in {major}:")
         for student in self.students:

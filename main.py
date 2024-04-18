@@ -1,9 +1,13 @@
 import sys
 from managementSystem import ManagementSystem
 
+#main system
 def main():
+    #create an instance of the ManagementSystem class
     ms = ManagementSystem()
+    #print welcome message
     ms.welcomeMessage()
+    #start of main loop
     while True:
         choice = int(input("Please Enter the Operation Code: "))
         match choice:
