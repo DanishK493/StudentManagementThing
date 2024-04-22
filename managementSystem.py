@@ -18,7 +18,7 @@ class ManagementSystem:
             print(f"An error occurred: {e}")
             
     def welcomeMessage(self):
-        self.read_and_print_file('welcome.txt')
+        self.read_and_print_file('show.txt')
         
     def addStudent(self):
         self.read_and_print_file('addstudent.txt')
@@ -64,7 +64,8 @@ class ManagementSystem:
             print(f"Student ID {ID} doesn't exist") 
         #if ID is in students
         else:
-            #*add print student record
+            print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Absences':<20s}")
+            print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}{str(student['Absences']):<20s}")
             #checks if user is sure
             q = input("Are you sure you want to delete the record? Y or N: ")
             #if user is sure, it deletes the record
@@ -116,7 +117,7 @@ class ManagementSystem:
         else:
             print(f"Student ID {id} doesn't exist")
         
-    def showStudent(self):
+    def showStudentbyID(self):
         #enter ID of student to show
         id = input("Please enter the Student ID you want to query: ")
         student = self.session.query(Student).filter_by(id=id).first()
@@ -156,5 +157,18 @@ class ManagementSystem:
         for student in self.students:
             if student['Major'] == major:
                 print(f"{student['Name']:<20s}")
+    
+    def showStudentGrade(self):
+        #enter name of student
+        name = input("Enter the name of the student you want to show: ")
+        student = next((s for s in self.students if s["Name"] == name),None)
+        if student is None:
+            print(f"Student {name} doesn't exist")
+        #if student exists
+        else:
+            print(f"{'ID':<20s}{'Name':<20s}{'CS 1100':<20s}{'CS 1200':<20s}{'CS 1300':<20s}")
+            #for i in self.students:
+                #if i["Name"] == name:
+                    #print(f"{i['ID']:<20}{i['Name']:<20s}{'A':<20s}{'B':<20s}{'C':<20s}")
 
         
