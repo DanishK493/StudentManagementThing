@@ -1,3 +1,4 @@
+import hashlib
 import re
 import sys
 from sqlalchemy.orm import sessionmaker
@@ -36,7 +37,8 @@ class ManagementSystem:
             else:
                 break
 
-        new_user = User(name=username, password=password)
+        hashed_password = hashlib.md5(password.encode()).hexdigest()
+        new_user = User(name=username, password=hashed_password)
         self.session.add(new_user)
 
         # Commit the changes
@@ -52,10 +54,13 @@ class ManagementSystem:
             print("Login Failed! Account Doesn't Exist")
             username = input("Please Enter Your Account Username: ")
             user = self.session.query(User).filter_by(name=username).first()
-        password = input("Please Enter Your Account Password: ")    
+        password = input("Please Enter Your Account Password: ")  
+        hashed_password = hashlib.md5(password.encode()).hexdigest()
         while password != user.password:
             print("Invalid password")
             password = input("Please Enter Your Account Password: ")
+            hashed_password = hashlib.md5(password.encode()).hexdigest()
+
         self.welcomeMessage()
     def read_and_print_file(self, path):
         try:
