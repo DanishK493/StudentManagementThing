@@ -56,7 +56,7 @@ class ManagementSystem:
             user = self.session.query(User).filter_by(name=username).first()
         password = input("Please Enter Your Account Password: ")  
         hashed_password = hashlib.md5(password.encode()).hexdigest()
-        while password != user.password:
+        while hashed_password != user.password:
             print("Invalid password")
             password = input("Please Enter Your Account Password: ")
             hashed_password = hashlib.md5(password.encode()).hexdigest()
