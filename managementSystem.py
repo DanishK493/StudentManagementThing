@@ -12,6 +12,14 @@ class ManagementSystem:
                 print(content) # print welcome menu
         except Exception as e:
             print(f"An error occurred: {e}")
+    def showStudentMenu(self):
+        path = 'show.txt'
+        try:
+            with open(path,'r',encoding='UTF-8') as file:
+                content = file.read()
+                print(content) # print welcome menu
+        except Exception as e:
+            print(f"An error occurred: {e}")
     def addStudent(self):
         path = 'addstudent.txt'
         try:
@@ -110,7 +118,7 @@ class ManagementSystem:
         with open('student.json', 'w') as f:
             json.dump(self.students, f, indent=4)
         
-    def showStudent(self):
+    def showStudentbyID(self):
         #enter ID of student to show
         ID = input("Enter the ID of the student you want to show: ")
         student = next((s for s in self.students if s["ID"] == ID),None)
@@ -122,6 +130,19 @@ class ManagementSystem:
             for i in self.students:
                 if i["ID"] == ID:
                     print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Absences':<20s}")
+                    print(f"{i['ID']:<20}{i['Name']:<20s}{i['Phone']:<20s}{i['Major']:<20s}{str(i['Absences']):<20s}")
+    def showStudentbyName(self):
+        #enter ID of student to show
+        name = input("Enter the name of the student you want to show: ")
+        student = next((s for s in self.students if s["Name"] == name),None)
+        if student is None:
+            print(f"Student {name} doesn't exist")
+        #if ID is in students
+        else:
+            #prints single ID
+            print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Absences':<20s}")
+            for i in self.students:
+                if i["Name"] == name:
                     print(f"{i['ID']:<20}{i['Name']:<20s}{i['Phone']:<20s}{i['Major']:<20s}{str(i['Absences']):<20s}")
     def displayStudents(self):
         #prints all students
@@ -153,5 +174,18 @@ class ManagementSystem:
         for student in self.students:
             if student['Major'] == major:
                 print(f"{student['Name']:<20s}")
+    
+    def showStudentGrade(self):
+        #enter name of student
+        name = input("Enter the name of the student you want to show: ")
+        student = next((s for s in self.students if s["Name"] == name),None)
+        if student is None:
+            print(f"Student {name} doesn't exist")
+        #if student exists
+        else:
+            print(f"{'ID':<20s}{'Name':<20s}{'CS 1100':<20s}{'CS 1200':<20s}{'CS 1300':<20s}")
+            #for i in self.students:
+                #if i["Name"] == name:
+                    #print(f"{i['ID']:<20}{i['Name']:<20s}{'A':<20s}{'B':<20s}{'C':<20s}")
 
         
