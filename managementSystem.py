@@ -65,7 +65,7 @@ class ManagementSystem:
         #if ID is in students
         else:
             print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Absences':<20s}")
-            print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}{str(student['Absences']):<20s}")
+            print(f"{student.id:<20s}{student.name:<20s}{student.age:<20d}{student.gender:<20s}{student.major:<20s}{student.phone:<20s}")
             #checks if user is sure
             q = input("Are you sure you want to delete the record? Y or N: ")
             #if user is sure, it deletes the record
