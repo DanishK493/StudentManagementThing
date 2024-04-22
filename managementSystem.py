@@ -67,11 +67,8 @@ class ManagementSystem:
             
     def welcomeMessage(self):
         self.read_and_print_file('welcome.txt')
-<<<<<<< Updated upstream
-=======
     def showStudentMenu(self):
         self.read_and_print_file('show.txt')
->>>>>>> Stashed changes
         
     def addStudent(self):
         self.read_and_print_file('addstudent.txt')
@@ -117,12 +114,8 @@ class ManagementSystem:
             print(f"Student ID {ID} doesn't exist") 
         #if ID is in students
         else:
-<<<<<<< Updated upstream
-            print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Absences':<20s}")
-=======
             print("==============================Student Record==============================")
             print(f"{'ID':<20s}{'Name':<20s}{'Age':<20s}{'Gender':<20s}{'Major':<20s}{'Phone':<20s}")
->>>>>>> Stashed changes
             print(f"{student.id:<20s}{student.name:<20s}{student.age:<20d}{student.gender:<20s}{student.major:<20s}{student.phone:<20s}")
             #checks if user is sure
             q = input("Are you sure you want to delete the record? Y or N: ")
@@ -214,7 +207,7 @@ class ManagementSystem:
             #for i in self.students:
                 #if i["Name"] == name:
                     #print(f"{i['ID']:<20}{i['Name']:<20s}{'A':<20s}{'B':<20s}{'C':<20s}")
-   """def absences(self):
+    def absences(self):
         #enter ID of student to count absent
         ID = input("Enter the ID of the student you want to count absent: ")
         #checks if ID is in students
@@ -235,7 +228,6 @@ class ManagementSystem:
         print(f"Students in {major}:")
         for student in self.students:
             if student['Major'] == major:
-<<<<<<< Updated upstream
                 print(f"{student['Name']:<20s}")
     
     def showStudentGrade(self):
@@ -292,8 +284,3 @@ class ManagementSystem:
                     self.absences()
                 case 6:
                     sys.exit()
-=======
-                print(f"{student['Name']:<20s}")"""
-
-        
->>>>>>> Stashed changes
