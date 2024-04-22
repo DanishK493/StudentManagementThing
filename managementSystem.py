@@ -57,15 +57,14 @@ class ManagementSystem:
             print(f"Student ID {ID} doesn't exist") 
         #if ID is in students
         else:
-            #*add print student record
+            print(f"{'ID':<20s}{'Name':<20s}{'Phone':<20s}{'Major':<20s}{'Absences':<20s}")
+            print(f"{student['ID']:<20}{student['Name']:<20s}{student['Phone']:<20s}{student['Major']:<20s}{str(student['Absences']):<20s}")
             #checks if user is sure
             q = input("Are you sure you want to delete the record? Y or N: ")
             #if user is sure, it deletes the record
             if q.upper() == "Y":
-                for i in range(len(self.students)-1 if len(self.students) > 1 else 1):
-                    if self.students[i]["ID"] == ID:
-                        del self.students[i]
-                        print("Student record has been deleted")
+                del self.students[self.students.index(student)]
+                print("Student record has been deleted")
             #if user is not sure, it passes
             else:
                 pass
