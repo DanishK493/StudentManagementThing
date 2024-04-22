@@ -5,8 +5,7 @@
 		Ã¢â€”â€   2. Delete Student
 		Ã¢â€”â€   3. Modify Student
 		Ã¢â€”â€   4. Show Student
-		Ã¢â€”â€   5. Count Student Absent
-		Ã¢â€”â€   6. Query Student Scores
-		Ã¢â€”â€   7. Exit the system
+		Ã¢â€”â€   5. Query Student Scores
+		Ã¢â€”â€   6. Exit the system
 
 ============================================================
