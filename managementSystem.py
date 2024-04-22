@@ -18,7 +18,7 @@ class ManagementSystem:
             print(f"An error occurred: {e}")
             
     def welcomeMessage(self):
-        self.read_and_print_file('show.txt')
+        self.read_and_print_file('welcome.txt')
         
     def addStudent(self):
         self.read_and_print_file('addstudent.txt')
