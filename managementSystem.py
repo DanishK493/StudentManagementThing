@@ -9,6 +9,54 @@ class ManagementSystem:
         self.engine = create_engine('sqlite:///students.db')
         Session = sessionmaker(bind=self.engine)
         self.session = Session()
+    def loginMessage(self):
+        self.read_and_print_file('login.txt')
+            
+        
+    def register(self):
+        print("==============================Register==============================\n1. Account name is between 3 and 6 letters long\n2. Account name's first letter must be capitalized")
+        while True:
+            username = input("Please Enter Account Name: ")
+            existing_user = self.session.query(User).filter_by(name=username).first()
+            if existing_user:
+                print("Registration Failed! Account Already Exists")
+            elif not ((len(username) >= 3 and len(username) <= 6) and username.isalnum()):
+                print("Account Name Not Valid!")
+            else:
+                break
+    
+        print("1. Password must start with one of the following special characters !@#$%^&*")
+        print("2. Password must contain at least one digit, one lowercase letter, and one uppercase letter")
+        print("3. Password is between 6 and 12 letters long")
+
+        while True:
+            password = input("Please enter your password: ")
+            if not re.match(r"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,12}$", password):
+                print("Password Not Valid!")
+            else:
+                break
+
+        new_user = User(name=username, password=password)
+        self.session.add(new_user)
+
+        # Commit the changes
+        self.session.commit()
+        print("Registration completed!")
+        self.welcomeMessage()
+        
+    def login(self):
+        print("==============================Login==============================")
+        username = input("Please Enter Your Account Username: ")
+        user = self.session.query(User).filter_by(name=username).first()
+        while not user:
+            print("Login Failed! Account Doesn't Exist")
+            username = input("Please Enter Your Account Username: ")
+            user = self.session.query(User).filter_by(name=username).first()
+        password = input("Please Enter Your Account Password: ")    
+        while password != user.password:
+            print("Invalid password")
+            password = input("Please Enter Your Account Password: ")
+        self.welcomeMessage()
     def read_and_print_file(self, path):
         try:
             with open(path,'r',encoding='UTF-8') as file:
@@ -170,5 +218,45 @@ class ManagementSystem:
             #for i in self.students:
                 #if i["Name"] == name:
                     #print(f"{i['ID']:<20}{i['Name']:<20s}{'A':<20s}{'B':<20s}{'C':<20s}")
-
-        
+    def login_register(self):
+        while True:
+            self.loginMessage()
+            choice = input("Please select (1 - 3): ")
+            if choice == '1':
+                self.login()
+                return
+            elif choice == '2':
+                self.register()
+                return
+            elif choice == '3':
+                sys.exit()
+            else:
+                print("Invalid Choice.")
+    def operations(self):
+        while True:
+            #print welcome message
+            self.welcomeMessage()
+            choice = int(input("Please Enter the Operation Code: "))
+            match choice:
+                case 1:
+                    self.addStudent()
+                case 2:
+                    self.delStudent()
+                case 3:
+                    self.modifyStudent()
+                case 4:
+                    self.showStudentMenu()
+                    choice2 = int(input("Please Enter the Operation Code: "))
+                    match choice2:
+                        case 1:
+                            self.showStudentbyID()
+                        case 2:
+                            self.showStudentbyName()
+                        case 3:
+                            self.displayStudents()
+                        case 4:
+                            self.displayStudentsInMajor()
+                case 5:
+                    self.absences()
+                case 6:
+                    sys.exit()
