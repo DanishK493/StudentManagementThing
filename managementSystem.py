@@ -216,7 +216,45 @@ class ManagementSystem:
             for i in students:
                 if i.name == name:
                     print(f"{i.id:<20s}{i.name:<20s}{i.CS1100:<20d}{i.CS1200:<20d}{i.CS1300:<20d}")
-                    
+    def login_register(self):
+        while True:
+            self.loginMessage()
+            choice = input("Please select (1 - 3): ")
+            if choice == '1':
+                self.login()
+                return
+            elif choice == '2':
+                self.register()
+                return
+            elif choice == '3':
+                sys.exit()
+            else:
+                print("Invalid Choice.")
+    def operations(self):
+        while True:
+            #print welcome message
+            self.welcomeMessage()
+            choice = int(input("Please Enter the Operation Code: "))
+            match choice:
+                case 1:
+                    self.addStudent()
+                case 2:
+                    self.delStudent()
+                case 3:
+                    self.modifyStudent()
+                case 4:
+                    self.showStudentMenu()
+                    choice2 = int(input("Please Enter the Operation Code: "))
+                    match choice2:
+                        case 1:
+                            self.showStudentbyID()
+                        case 2:
+                            self.showStudentbyName()
+                        case 3:
+                            self.displayStudents()
+                case 6:
+                    sys.exit()
+               
 """ not sure if we'll need these, but they're here just in case  
     def absences(self):
         #enter ID of student to count absent
@@ -241,4 +279,4 @@ class ManagementSystem:
             if student['Major'] == major:
                 print(f"{student['Name']:<20s}")"""
 
-        
+    
