@@ -190,12 +190,9 @@ class ManagementSystem:
         if student:
             print("==============================Student Record==============================")
             print(f"{'ID':<20s}{'Name':<20s}{'Age':<20s}{'Gender':<20s}{'Major':<20s}{'Phone':<20s}")
-            students = self.session.query(Student).filter(Student.name == name).all()
-            for student in students:
-                if student.name is name:
-                    print(f"{student.id:<20s}{student.name:<20s}{student.age:<20s}{student.gender:<20s}{student.major:<20s}{student.phone:<20s}")
+            print(f"{student.id:<20s}{student.name:<20s}{student.age:<20d}{student.gender:<20s}{student.major:<20s}{student.phone:<20s}")
         else:
-            print(f"\u274C Student with ID {id} not found")
+            print(f"\u274C Student with Name {name} not found")
     def displayStudents(self):
         #prints all students
         print("Student Record")
@@ -233,7 +230,6 @@ class ManagementSystem:
     def operations(self):
         while True:
             #print welcome message
-            self.welcomeMessage()
             choice = int(input("Please Enter the Operation Code: "))
             match choice:
                 case 1:
