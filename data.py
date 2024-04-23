@@ -29,6 +29,13 @@ class Score(Base):
     CS1100 = Column(Integer)
     CS2030 = Column(Integer)
 
+class Absence(Base):
+    __tablename__ = 'absence'
+
+    id = Column(String(9), primary_key=True, unique=True)
+    name = Column(String(32), nullable=False)
+    absences = Column(Integer)
+
 engine = create_engine('sqlite:///students.db')
 Base.metadata.create_all(engine)
 
