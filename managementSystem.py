@@ -190,7 +190,10 @@ class ManagementSystem:
         if student:
             print("==============================Student Record==============================")
             print(f"{'ID':<20s}{'Name':<20s}{'Age':<20s}{'Gender':<20s}{'Major':<20s}{'Phone':<20s}")
-            print(f"{student.id:<20s}{student.name:<20s}{student.age:<20d}{student.gender:<20s}{student.major:<20s}{student.phone:<20s}")
+            students = self.session.query(Student).filter(Student.name == name).all()
+            for student in students:
+                if student.name is name:
+                    print(f"{student.id:<20s}{student.name:<20s}{student.age:<20s}{student.gender:<20s}{student.major:<20s}{student.phone:<20s}")
         else:
             print(f"\u274C Student with ID {id} not found")
     def displayStudents(self):
@@ -209,9 +212,12 @@ class ManagementSystem:
         #if student exists
         else:
             print(f"{'ID':<20s}{'Name':<20s}{'CS 1100':<20s}{'CS 1200':<20s}{'CS 1300':<20s}")
-            #for i in self.students:
-                #if i["Name"] == name:
-                    #print(f"{i['ID']:<20}{i['Name']:<20s}{'A':<20s}{'B':<20s}{'C':<20s}")
+            students = self.session.query(Student).all()
+            for i in students:
+                if i.name == name:
+                    print(f"{i.id:<20s}{i.name:<20s}{i.CS1100:<20d}{i.CS1200:<20d}{i.CS1300:<20d}")
+                    
+""" not sure if we'll need these, but they're here just in case  
     def absences(self):
         #enter ID of student to count absent
         ID = input("Enter the ID of the student you want to count absent: ")
@@ -233,59 +239,6 @@ class ManagementSystem:
         print(f"Students in {major}:")
         for student in self.students:
             if student['Major'] == major:
-                print(f"{student['Name']:<20s}")
-    
-    def showStudentGrade(self):
-        #enter name of student
-        name = input("Enter the name of the student you want to show: ")
-        student = next((s for s in self.students if s["Name"] == name),None)
-        if student is None:
-            print(f"Student {name} doesn't exist")
-        #if student exists
-        else:
-            print(f"{'ID':<20s}{'Name':<20s}{'CS 1100':<20s}{'CS 1200':<20s}{'CS 1300':<20s}")
-            #for i in self.students:
-                #if i["Name"] == name:
-                    #print(f"{i['ID']:<20}{i['Name']:<20s}{'A':<20s}{'B':<20s}{'C':<20s}")
-    def login_register(self):
-        while True:
-            self.loginMessage()
-            choice = input("Please select (1 - 3): ")
-            if choice == '1':
-                self.login()
-                return
-            elif choice == '2':
-                self.register()
-                return
-            elif choice == '3':
-                sys.exit()
-            else:
-                print("Invalid Choice.")
-    def operations(self):
-        while True:
-            #print welcome message
-            self.welcomeMessage()
-            choice = int(input("Please Enter the Operation Code: "))
-            match choice:
-                case 1:
-                    self.addStudent()
-                case 2:
-                    self.delStudent()
-                case 3:
-                    self.modifyStudent()
-                case 4:
-                    self.showStudentMenu()
-                    choice2 = int(input("Please Enter the Operation Code: "))
-                    match choice2:
-                        case 1:
-                            self.showStudentbyID()
-                        case 2:
-                            self.showStudentbyName()
-                        case 3:
-                            self.displayStudents()
-                        case 4:
-                            self.displayStudentsInMajor()
-                case 5:
-                    self.absences()
-                case 6:
-                    sys.exit()
+                print(f"{student['Name']:<20s}")"""
+
+        
