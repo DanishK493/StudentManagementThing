@@ -72,8 +72,12 @@ class ManagementSystem:
             
     def welcomeMessage(self):
         self.read_and_print_file('welcome.txt')
+        
     def showStudentMenu(self):
         self.read_and_print_file('show.txt')
+        
+    def studentGradeMenu(self):
+        self.read_and_print_file('studentgrade.txt')
         
     def addStudent(self):
         self.read_and_print_file('addstudent.txt')
@@ -227,6 +231,30 @@ class ManagementSystem:
                 sys.exit()
             else:
                 print("Invalid Choice.")
+    def studentAbsences(self):
+        #enter ID of student to count absent
+        ID = input("Enter the ID of the student you want to count absent: ")
+        #checks if ID is in students
+        student = self.session.query(Student).filter_by(id=ID).first()
+        #if student doesn't exist
+        if student is None:
+            print(f"Student ID {ID} doesn't exist")
+        #if student exists
+        else:
+            #absent is counted
+            
+            print("Absence added")
+        #json file is updated
+        self.session.commit()
+    def showAbsences(self):
+        ID = input("Enter the ID of the student you want to count absent: ")
+        student = self.session.query(Student).filter_by(id=ID).first()
+        if student is None:
+            print(f"Student ID {ID} doesn't exist")
+        else:
+            print(f"Student {student.name} has {student.absences} absences")
+            if student.absences >= 5:
+                print(f"Student {student.name} is suspended on account of too many absences")
     def operations(self):
         while True:
             #print welcome message
@@ -249,6 +277,16 @@ class ManagementSystem:
                         case 3:
                             self.displayStudents()
                 case 6:
+                    self.studentGradeMenu()
+                    choice3 = int(input("Please Enter the Operation Code: "))
+                    match choice3:
+                        case 1:
+                            self.showStudentGrade()
+                        case 2:
+                            print("work in progress...")
+                case 7:
+                    self.studentAbsences()
+                case 8:
                     sys.exit()
                
 """ not sure if we'll need these, but they're here just in case  
