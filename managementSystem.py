@@ -297,10 +297,10 @@ class ManagementSystem:
                             self.displayStudents()
                 case 5:
                     self.showStudentGrade()
-                case 7:
+                case 6:
                     self.studentAbsences()
-                case 8:
-                    sys.exit()
+                case 7:
+                    return
                
 """ not sure if we'll need these, but they're here just in case  
     def absences(self):

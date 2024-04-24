@@ -7,6 +7,6 @@
 		Ã¢â€”â€   4. Show Student
 		Ã¢â€”â€   5. Query Student Scores
 		Ã¢â€”â€   6. Show Student Absences
-		Ã¢â€”â€   7. Exit the system
+		Ã¢â€”â€   7. Return to the Previous Menu
 
 ============================================================
