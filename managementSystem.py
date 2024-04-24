@@ -156,23 +156,26 @@ class ManagementSystem:
         #if student id exists
         if student:
             #gives new name, phone, and major
-            name = input("New name: ")
-            phone = input("New phone: ")
-            major = input("New major: ")
-            #checks if name is valid
-            if  (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
-                student.name = name
-                #adds a count if name is modified
-                counter+=1
-            #checks if phone is valid
-            if (len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
+            age = input("New age: ")
+            if age.strip():
+                if not (int(age) > 0 and int(age) < 100):
+                    print("Invalid age")
+                    return
+                student.age = age
+                counter += 1
+            phone = input("New phone \u260E: ")
+            if phone.strip():
+                if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
+                    print("Invalid Phone Number")
+                    return
                 student.phone = phone
-                #adds a count if phone is modified
-                counter+=1
-            #checks if major is valid
-            if major.upper() in ['CS','CYBR','SE','IT','DS']:
-                student.major = major.upper()
-                #adds a count if major is modified
+                counter += 1
+            major = input("New major: ").upper()
+            if major.strip():
+                if major not in ['CS','CYBR','SE','IT','DS']:
+                    print("Invalid Major")
+                    return
+                student.major = major
                 counter+=1
             #if any of the fields are modified
             if counter != 0:
@@ -212,18 +215,34 @@ class ManagementSystem:
         for student in students:
             print(f"{student.id:<20s}{student.name:<20s}{student.age:<20d}{student.gender:<20s}{student.major:<20s}{student.phone:<20s}")
     def showStudentGrade(self):
-        #enter name of student
-        name = input("Enter the name of the student you want to show: ")
-        student = next((s for s in self.students if s["Name"] == name),None)
-        if student is None:
-            print(f"Student {name} doesn't exist")
-        #if student exists
-        else:
-            print(f"{'ID':<20s}{'Name':<20s}{'CS 1100':<20s}{'CS 1200':<20s}{'CS 1300':<20s}")
-            students = self.session.query(Student).all()
-            for i in students:
-                if i.name == name:
-                    print(f"{i.id:<20s}{i.name:<20s}{i.CS1100:<20d}{i.CS1200:<20d}{i.CS1300:<20d}")
+        self.studentGradeMenu()
+        choice = input("Please Select: ")
+        if choice == "1":
+            name = input("Please Enter Student Name To Display The Score: ")
+            score = self.session.query(Score).filter_by(name=name).first()
+            if score: # if name exists post student scores
+                print(f"{'ID':<20s}{'Name':<20s}{'CS 1030':<20s}{'CS 1100':<20s}{'CS 2030':<20s}")
+                print(f"{score.id:<20s}{score.name:<20s}{score.CS1030:<20d}{score.CS1100:<20d}{score.CS2030:<20d}")
+            else:
+                print(f"\u274C Student with Name {name} not found")
+        elif choice == "2":
+            id = input("Please Enter The Student Id To Update The Score: ")
+            score = self.session.query(Score).filter_by(id=id).first()
+            if score: # input new scores, old scores remain if user presses enter
+                score1_input = input("New grade for CS 1030 (press enter without modification): ")
+                score1 = int(score1_input) if score1_input else score.CS1030 
+                score2_input = input("New grade for CS 1100 (press enter without modification): ")
+                score2 = int(score2_input) if score2_input else score.CS1100
+                score3_input = input("New grade for CS 2030 (press enter without modification): ")
+                score3 = int(score3_input) if score3_input else score.CS2030
+                score.CS1030 = int(score1) if score1 else score.CS1030
+                score.CS1100 = int(score2) if score2 else score.CS1100
+                score.CS2030 = int(score3) if score3 else score.CS2030
+
+                self.session.commit() # commit changes
+            else:
+                print(f"\u274C Student with ID {id} not found")
+                return
     def login_register(self):
         while True:
             self.loginMessage()
@@ -295,7 +314,5 @@ class ManagementSystem:
                 case 6:
                     self.studentAbsences()
                 case 7:
-                    sys.exit()
+                    return
                
-
-    
