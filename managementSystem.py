@@ -3,7 +3,7 @@ import re
 import sys
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
-from data import User, Student, Score
+from data import User, Student, Score, Absence
 
 class ManagementSystem:
     def __init__(self):
@@ -78,6 +78,9 @@ class ManagementSystem:
         
     def studentGradeMenu(self):
         self.read_and_print_file('studentgrade.txt')
+    
+    def studentAbsenceMenu(self):
+        self.read_and_print_file('absence.txt')
         
     def addStudent(self):
         self.read_and_print_file('addstudent.txt')
@@ -109,6 +112,9 @@ class ManagementSystem:
 
         new_score = Score(id=id, name=name, CS1030=0, CS1100=0, CS2030=0)
         self.session.add(new_score)
+        
+        new_absence = Absence(id=id, name=name, absences=0)
+        self.session.add(new_absence)
 
         self.session.commit()
     #deletes student record
@@ -251,29 +257,36 @@ class ManagementSystem:
             else:
                 print("Invalid Choice.")
     def studentAbsences(self):
-        #enter ID of student to count absent
-        ID = input("Enter the ID of the student you want to count absent: ")
-        #checks if ID is in students
-        student = self.session.query(Student).filter_by(id=ID).first()
-        #if student doesn't exist
-        if student is None:
-            print(f"Student ID {ID} doesn't exist")
-        #if student exists
-        else:
-            #absent is counted
-            
-            print("Absence added")
-        #json file is updated
-        self.session.commit()
-    def showAbsences(self):
-        ID = input("Enter the ID of the student you want to count absent: ")
-        student = self.session.query(Student).filter_by(id=ID).first()
-        if student is None:
-            print(f"Student ID {ID} doesn't exist")
-        else:
-            print(f"Student {student.name} has {student.absences} absences")
-            if student.absences >= 5:
-                print(f"Student {student.name} is suspended on account of too many absences")
+        self.studentAbsenceMenu()
+        choice = int(input("Please Select Command: "))
+        if choice == 1:
+            #enter name of student to count absent  
+            name = input("Please Enter Student Name To Display Absences: ")
+            #finds student
+            absence = self.session.query(Absence).filter_by(name=name).first()
+            #if student doesn't exist
+            if absence is None:
+                print(f"Student {name} doesn't exist")
+            #if student exists
+            else:
+                print(f"Student {absence.name} has {absence.absences} absences")
+                #if student has 5 or more absences, they are suspended
+                if absence.absences >= 5:
+                    print(f"Student {absence.name} is suspended on account of too many absences")
+        elif choice == 2:
+            # finds student by ID
+            ID = input("Please Enter Student ID To Count Absent: ")
+            absence = self.session.query(Absence).filter_by(id=ID).first()
+            #if student doesn't exist
+            if absence is None:
+                print(f"Student ID {ID} doesn't exist")
+            #if student exists
+            else:
+                #absent is counted
+                absence.absences += 1
+                print("Absence added")
+            #commit changes
+            self.session.commit()
     def operations(self):
         while True:
             #print welcome message
@@ -297,33 +310,10 @@ class ManagementSystem:
                             self.displayStudents()
                 case 5:
                     self.showStudentGrade()
-                case 7:
+                case 6:
                     self.studentAbsences()
-                case 8:
+                case 7:
                     sys.exit()
                
-""" not sure if we'll need these, but they're here just in case  
-    def absences(self):
-        #enter ID of student to count absent
-        ID = input("Enter the ID of the student you want to count absent: ")
-        #checks if ID is in students
-        student = next((s for s in self.students if s["ID"] == ID),None)
-        #if student doesn't exist
-        if student is None:
-            print(f"Student ID {ID} doesn't exist")
-        #if student exists
-        else:
-            #absent is counted
-            student["Absences"] += 1
-            print("Absence added")
-        #json file is updated
-
-    def displayStudentsInMajor(self):
-        #prints all students taking a specific course
-        major = input("Enter major: ").upper()
-        print(f"Students in {major}:")
-        for student in self.students:
-            if student['Major'] == major:
-                print(f"{student['Name']:<20s}")"""
 
     
