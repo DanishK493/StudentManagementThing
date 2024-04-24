@@ -13,23 +13,25 @@ class ManagementSystem:
     def loginMessage(self):
         self.read_and_print_file('login.txt')
             
-        
+    #Register student
     def register(self):
         print("==============================Register==============================\n1. Account name is between 3 and 6 letters long\n2. Account name's first letter must be capitalized")
         while True:
             username = input("Please Enter Account Name: ")
             existing_user = self.session.query(User).filter_by(name=username).first()
+            #Prompts for if the input is invalid 
             if existing_user:
-                print("Registration Failed! Account Already Exists")
+                print("Registration Failed! Account Already Exists") 
             elif not ((len(username) >= 3 and len(username) <= 6) and username.isalnum()):
                 print("Account Name Not Valid!")
             else:
                 break
-    
+             #Instructons for registry input 
         print("1. Password must start with one of the following special characters !@#$%^&*")
         print("2. Password must contain at least one digit, one lowercase letter, and one uppercase letter")
         print("3. Password is between 6 and 12 letters long")
 
+    #Log in password
         while True:
             password = input("Please enter your password: ")
             if not re.match(r"^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,12}$", password):
@@ -46,18 +48,18 @@ class ManagementSystem:
         print("Registration completed!")
         self.welcomeMessage()
         
-    def login(self):
+    def login(self):    #Account login
         print("==============================Login==============================")
         username = input("Please Enter Your Account Username: ")
         user = self.session.query(User).filter_by(name=username).first()
         while not user:
-            print("Login Failed! Account Doesn't Exist")
+            print("Login Failed! Account Doesn't Exist")    #Prompts for inccorect account input
             username = input("Please Enter Your Account Username: ")
             user = self.session.query(User).filter_by(name=username).first()
         password = input("Please Enter Your Account Password: ")  
         hashed_password = hashlib.md5(password.encode()).hexdigest()
         while hashed_password != user.password:
-            print("Invalid password")
+            print("Invalid password")   #Prompts for inccorect account input
             password = input("Please Enter Your Account Password: ")
             hashed_password = hashlib.md5(password.encode()).hexdigest()
 
@@ -70,10 +72,9 @@ class ManagementSystem:
         except Exception as e:
             print(f"An error occurred: {e}")
             
-    def welcomeMessage(self):
+    def welcomeMessage(self):   #Output of the welcome screen 
         self.read_and_print_file('welcome.txt')
-        
-    def showStudentMenu(self):
+    def showStudentMenu(self):  #output of student menu
         self.read_and_print_file('show.txt')
         
     def studentGradeMenu(self):
@@ -84,33 +85,33 @@ class ManagementSystem:
         
     def addStudent(self):
         self.read_and_print_file('addstudent.txt')
-        name = input("Please enter the student name (Firstname Lastname): ")
+        name = input("Please enter the student name (Firstname Lastname): ") #Prompt to add name
         if not (name.istitle() and len(name.split()) == 2 and all(len(part) >= 2 for part in name.split()) and name.replace(' ','').isalpha()):
             print("Invalid Name")
             return
-        age = input("Please Enter Student's Age: ")
+        age = input("Please Enter Student's Age: ") #Prompt to add age
         if not (int(age) > 0 and int(age) < 100):
-            print("Invalid age")
+            print("Invalid age") #Prompts for inccorect account input
             return
-        gender = input("Please Enter Student's Gender: ").upper()
+        gender = input("Please Enter Student's Gender: ").upper() #Prompt to add gender
         if not(gender == 'M' or gender == 'F' or gender == 'O'):
-            print("Invalid Gender")
+            print("Invalid Gender") #Prompts for inccorect account input
             return
-        phone = input("Please Enter the Student Phone \u260E: ")
+        phone = input("Please Enter the Student Phone \u260E: ")    #Prompt to add new students number
         if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
-            print("Invalid Phonenumber")
+            print("Invalid Phonenumber")    #Prompts for inccorect account input
             return
-        major = input("Please Enter the Student Major: ").upper()
+        major = input("Please Enter the Student Major: ").upper()   #Prompt to add major
         if major not in ['CS','CYBR','SE','IT','DS']:
-            print("Invalid Major")
+            print("Invalid Major")  #Prompts for inccorect account input
             return
         id = str(700300000 + self.session.query(Student).count() + 1)
 
-        print("\u2714 New student record has been added!")
+        print("\u2714 New student record has been added!")  #Output when student is add to the system
         new_student = Student(id=id, name=name, age=age, gender=gender, major=major, phone=phone)
         self.session.add(new_student)
 
-        new_score = Score(id=id, name=name, CS1030=0, CS1100=0, CS2030=0)
+        new_score = Score(id=id, name=name, CS1030=0, CS1100=0, CS2030=0)   #creating new score for new student
         self.session.add(new_score)
         
         new_absence = Absence(id=id, name=name, absences=0)
@@ -155,26 +156,23 @@ class ManagementSystem:
         #if student id exists
         if student:
             #gives new name, phone, and major
-            age = input("New age: ")
-            if age.strip():
-                if not (int(age) > 0 and int(age) < 100):
-                    print("Invalid age")
-                    return
-                student.age = age
-                counter += 1
-            phone = input("New phone \u260E: ")
-            if phone.strip():
-                if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
-                    print("Invalid Phone Number")
-                    return
+            name = input("New name: ")
+            phone = input("New phone: ")
+            major = input("New major: ")
+            #checks if name is valid
+            if  (name.istitle() and len(name.split()) == 2 and name.replace(' ','').isalpha()):
+                student.name = name
+                #adds a count if name is modified
+                counter+=1
+            #checks if phone is valid
+            if (len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
                 student.phone = phone
-                counter += 1
-            major = input("New major: ").upper()
-            if major.strip():
-                if major not in ['CS','CYBR','SE','IT','DS']:
-                    print("Invalid Major")
-                    return
-                student.major = major
+                #adds a count if phone is modified
+                counter+=1
+            #checks if major is valid
+            if major.upper() in ['CS','CYBR','SE','IT','DS']:
+                student.major = major.upper()
+                #adds a count if major is modified
                 counter+=1
             #if any of the fields are modified
             if counter != 0:
@@ -214,34 +212,18 @@ class ManagementSystem:
         for student in students:
             print(f"{student.id:<20s}{student.name:<20s}{student.age:<20d}{student.gender:<20s}{student.major:<20s}{student.phone:<20s}")
     def showStudentGrade(self):
-        self.studentGradeMenu()
-        choice = input("Please Select: ")
-        if choice == "1":
-            name = input("Please Enter Student Name To Display The Score: ")
-            score = self.session.query(Score).filter_by(name=name).first()
-            if score: # if name exists post student scores
-                print(f"{'ID':<20s}{'Name':<20s}{'CS 1030':<20s}{'CS 1100':<20s}{'CS 2030':<20s}")
-                print(f"{score.id:<20s}{score.name:<20s}{score.CS1030:<20d}{score.CS1100:<20d}{score.CS2030:<20d}")
-            else:
-                print(f"\u274C Student with Name {name} not found")
-        elif choice == "2":
-            id = input("Please Enter The Student Id To Update The Score: ")
-            score = self.session.query(Score).filter_by(id=id).first()
-            if score: # input new scores, old scores remain if user presses enter
-                score1_input = input("New grade for CS 1030 (press enter without modification): ")
-                score1 = int(score1_input) if score1_input else score.CS1030 
-                score2_input = input("New grade for CS 1100 (press enter without modification): ")
-                score2 = int(score2_input) if score2_input else score.CS1100
-                score3_input = input("New grade for CS 2030 (press enter without modification): ")
-                score3 = int(score3_input) if score3_input else score.CS2030
-                score.CS1030 = int(score1) if score1 else score.CS1030
-                score.CS1100 = int(score2) if score2 else score.CS1100
-                score.CS2030 = int(score3) if score3 else score.CS2030
-
-                self.session.commit() # commit changes
-            else:
-                print(f"\u274C Student with ID {id} not found")
-                return
+        #enter name of student
+        name = input("Enter the name of the student you want to show: ")
+        student = next((s for s in self.students if s["Name"] == name),None)
+        if student is None:
+            print(f"Student {name} doesn't exist")
+        #if student exists
+        else:
+            print(f"{'ID':<20s}{'Name':<20s}{'CS 1100':<20s}{'CS 1200':<20s}{'CS 1300':<20s}")
+            students = self.session.query(Student).all()
+            for i in students:
+                if i.name == name:
+                    print(f"{i.id:<20s}{i.name:<20s}{i.CS1100:<20d}{i.CS1200:<20d}{i.CS1300:<20d}")
     def login_register(self):
         while True:
             self.loginMessage()
