@@ -33,7 +33,7 @@ class Score(Base):
 class Absence(Base):
     __tablename__ = 'absence'
 
-    id = Column(String(9), primary_key=True, unique=True)
+    id = Column(String(9), primary_key=True)
     name = Column(String(32), nullable=False)
     absences = Column(Integer)
 

@@ -124,6 +124,7 @@ class ManagementSystem:
         ID = input("Enter the ID of the student you want to delete: ")
         student = self.session.query(Student).filter(Student.id == ID).first()
         score = self.session.query(Score).filter(Score.id == ID).first()
+        absence = self.session.query(Absence).filter(Absence.id == ID).first()
 
         #if ID is not in students
         if student is None:
@@ -141,6 +142,8 @@ class ManagementSystem:
                 if score is not None:
                     self.session.delete(score)
                 self.session.commit()
+                if absence is not None:
+                    self.session.delete(absence)
                 print("Student record has been deleted")
             #if user is not sure, it passes
             else:

@@ -18,6 +18,8 @@ def clear_data():
 
     # Clear all data from the score table
     cursor.execute('DELETE FROM score')
+    
+    cursor.execute('DELETE FROM absence')
 
     # Commit the changes and close the connection
     conn.commit()
@@ -55,6 +57,15 @@ scores = cursor.fetchall()
 print("Scores:")
 for score in scores:
     print(score)
+    
+cursor.execute('SELECT * FROM absence')
+absenses = cursor.fetchall()
+
+# Print all scores
+print("Absences:")
+for absense in absenses:
+    print(absense)
+
 
 # Close the connection to the database
 conn.close()
