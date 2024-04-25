@@ -57,7 +57,14 @@ scores = cursor.fetchall()
 print("Scores:")
 for score in scores:
     print(score)
-    
+
+cursor.execute('SELECT * FROM absence')
+absences = cursor.fetchall()
+
+# Print all scores
+print("absences:")
+for absence in absences:
+    print(absence)
 
 
 # Close the connection to the database

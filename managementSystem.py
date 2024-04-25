@@ -141,9 +141,8 @@ class ManagementSystem:
                 self.session.delete(student)
                 if score is not None:
                     self.session.delete(score)
+                self.session.delete(absence)
                 self.session.commit()
-                if absence is not None:
-                    self.session.delete(absence)
                 print("Student record has been deleted")
             #if user is not sure, it passes
             else:
