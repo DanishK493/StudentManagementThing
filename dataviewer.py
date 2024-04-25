@@ -58,13 +58,6 @@ print("Scores:")
 for score in scores:
     print(score)
     
-cursor.execute('SELECT * FROM absence')
-absenses = cursor.fetchall()
-
-# Print all scores
-print("Absences:")
-for absense in absenses:
-    print(absense)
 
 
 # Close the connection to the database
