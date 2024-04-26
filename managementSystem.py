@@ -210,7 +210,10 @@ class ManagementSystem:
         if student:
             print("==============================Student Record==============================")
             print(f"{'ID':<20s}{'Name':<20s}{'Age':<20s}{'Gender':<20s}{'Major':<20s}{'Phone':<20s}")
-            print(f"{student.id:<20s}{student.name:<20s}{student.age:<20d}{student.gender:<20s}{student.major:<20s}{student.phone:<20s}")
+            students = self.session.query(Student).all()
+            for i in students:
+                if i.name == name:
+                    print(f"{i.id:<20s}{i.name:<20s}{i.age:<20d}{i.gender:<20s}{i.major:<20s}{i.phone:<20s}")
         else:
             print(f"\u274C Student with Name {name} not found")
     def displayStudents(self):
@@ -228,7 +231,10 @@ class ManagementSystem:
             score = self.session.query(Score).filter_by(name=name).first()
             if score: # if name exists post student scores
                 print(f"{'ID':<20s}{'Name':<20s}{'CS 1030':<20s}{'CS 1100':<20s}{'CS 2030':<20s}")
-                print(f"{score.id:<20s}{score.name:<20s}{score.CS1030:<20d}{score.CS1100:<20d}{score.CS2030:<20d}")
+                scores = self.session.query(Score).all()
+                for i in scores:
+                    if i.name == name:
+                        print(f"{i.id:<20s}{i.name:<20s}{i.CS1030:<20d}{i.CS1100:<20d}{i.CS2030:<20d}")
             else:
                 print(f"\u274C Student with Name {name} not found")
         elif choice == "2":
