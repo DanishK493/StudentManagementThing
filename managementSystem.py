@@ -85,26 +85,31 @@ class ManagementSystem:
         
     def addStudent(self):
         self.read_and_print_file('addstudent.txt')
-        name = input("Please enter the student name (Firstname Lastname): ") #Prompt to add name
-        if not (name.istitle() and len(name.split()) == 2 and all(len(part) >= 2 for part in name.split()) and name.replace(' ','').isalpha()):
+        while True:
+            name = input("Please enter the student name (Firstname Lastname): ")
+            if name.istitle() and len(name.split()) == 2 and all(len(part) >= 2 for part in name.split()) and name.replace(' ','').isalpha():
+                break
             print("Invalid Name")
-            return
-        age = input("Please Enter Student's Age: ") #Prompt to add age
-        if not (int(age) > 0 and int(age) < 100):
-            print("Invalid age") #Prompts for inccorect account input
-            return
-        gender = input("Please Enter Student's Gender: ").upper() #Prompt to add gender
-        if not(gender == 'M' or gender == 'F' or gender == 'O'):
-            print("Invalid Gender") #Prompts for inccorect account input
-            return
-        phone = input("Please Enter the Student Phone \u260E: ")    #Prompt to add new students number
-        if not(len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit()):
-            print("Invalid Phonenumber")    #Prompts for inccorect account input
-            return
-        major = input("Please Enter the Student Major: ").upper()   #Prompt to add major
-        if major not in ['CS','CYBR','SE','IT','DS']:
-            print("Invalid Major")  #Prompts for inccorect account input
-            return
+        while True:
+            age = input("Please Enter Student's Age: ")
+            if age.isdigit() and 0 < int(age) < 100:
+                break
+            print("Invalid age")
+        while True:
+            gender = input("Please Enter Student's Gender: ").upper()
+            if gender in ['M', 'F', 'O']:
+                break
+            print("Invalid Gender")
+        while True:
+            phone = input("Please Enter the Student Phone \u260E: ")
+            if len(phone) == 12 and phone[3] == '-' and phone[7] == '-' and phone.replace('-','').isdigit():
+                break
+            print("Invalid Phonenumber")
+        while True:
+            major = input("Please Enter the Student Major: ").upper()
+            if major in ['CS','CYBR','SE','IT','DS']:
+                break
+            print("Invalid Major")
         id = str(700300000 + self.session.query(Student).count() + 1)
 
         print("\u2714 New student record has been added!")  #Output when student is add to the system
@@ -139,8 +144,7 @@ class ManagementSystem:
             #if user is sure, it deletes the record
             if q.upper() == "Y":
                 self.session.delete(student)
-                if score is not None:
-                    self.session.delete(score)
+                self.session.delete(score)
                 self.session.delete(absence)
                 self.session.commit()
                 print("Student record has been deleted")
