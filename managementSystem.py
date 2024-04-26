@@ -143,7 +143,6 @@ class ManagementSystem:
                     self.session.delete(score)
                 self.session.delete(absence)
                 self.session.commit()
-
                 print("Student record has been deleted")
             #if user is not sure, it passes
             else:
