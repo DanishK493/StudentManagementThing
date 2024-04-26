@@ -45,7 +45,7 @@ class ManagementSystem:
 
         # Commit the changes
         self.session.commit()
-        print("Registration completed!")
+        print(f"Registration completed! Welcome {username}!")
         self.welcomeMessage()
         
     def login(self):    #Account login
@@ -62,8 +62,8 @@ class ManagementSystem:
             print("Invalid password")   #Prompts for inccorect account input
             password = input("Please Enter Your Account Password: ")
             hashed_password = hashlib.md5(password.encode()).hexdigest()
-
-        self.welcomeMessage()
+        print(f"Login Successful! Welcome {username}!")
+    #Reads and prints files, makes it easier to print menus and the like
     def read_and_print_file(self, path):
         try:
             with open(path,'r',encoding='UTF-8') as file:
@@ -77,10 +77,10 @@ class ManagementSystem:
     def showStudentMenu(self):  #output of student menu
         self.read_and_print_file('show.txt')
         
-    def studentGradeMenu(self):
+    def studentGradeMenu(self): #prints student grade menu
         self.read_and_print_file('studentgrade.txt')
     
-    def studentAbsenceMenu(self):
+    def studentAbsenceMenu(self): #prints student absence menu
         self.read_and_print_file('absence.txt')
         
     def addStudent(self):
@@ -141,9 +141,9 @@ class ManagementSystem:
                 self.session.delete(student)
                 if score is not None:
                     self.session.delete(score)
+                self.session.delete(absence)
                 self.session.commit()
-                if absence is not None:
-                    self.session.delete(absence)
+
                 print("Student record has been deleted")
             #if user is not sure, it passes
             else:
@@ -273,7 +273,9 @@ class ManagementSystem:
                 print(f"Student {name} doesn't exist")
             #if student exists
             else:
-                print(f"Student {absence.name} has {absence.absences} absences")
+                #prints student absences
+                print(f"{'ID':<20s}{'Name':<20s}{'Absences':<20s}")
+                print(f"{absence.id:<20s}{absence.name:<20s}{absence.absences:<20d}")
                 #if student has 5 or more absences, they are suspended
                 if absence.absences >= 5:
                     print(f"Student {absence.name} is suspended on account of too many absences")
@@ -293,8 +295,9 @@ class ManagementSystem:
             self.session.commit()
     def operations(self):
         while True:
-            #print welcome message
+            self.welcomeMessage()
             choice = int(input("Please Enter the Operation Code: "))
+            #matches choice to any of the cases
             match choice:
                 case 1:
                     self.addStudent()

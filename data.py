@@ -5,12 +5,13 @@ from sqlalchemy.ext.declarative import declarative_base
 # Create a base class for declarative models
 Base = declarative_base()
 
+#class for users, used for registration and login
 class User(Base):
     __tablename__ = 'user'
 
     name = Column(String(32), primary_key=True, nullable=False)
     password = Column(String(512))
-
+#class for students, used for storing student information
 class Student(Base):
     __tablename__ = 'student'
 
@@ -20,7 +21,7 @@ class Student(Base):
     gender = Column(String(1))
     major = Column(String(32))
     phone = Column(String(32))
-
+#class for scores, used for storing student scores
 class Score(Base):
     __tablename__ = 'score'
 
@@ -29,7 +30,7 @@ class Score(Base):
     CS1030 = Column(Integer)
     CS1100 = Column(Integer)
     CS2030 = Column(Integer)
-
+#class for absences, used for storing student absences
 class Absence(Base):
     __tablename__ = 'absence'
 
